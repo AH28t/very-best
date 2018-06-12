@@ -87,7 +87,8 @@
   <div class="col-md-12">
     <table class="table table-striped table-hover">
       <tr>
-        <th>Name</th>
+        <th>The Very Best...</th>
+        <th>is at...</th>
         <th>Cuisine</th>
         <th>Actions</th>
       </tr>
@@ -96,7 +97,11 @@
       <tr>
         <td>
           <a href="/dishes/<%= dish.id %>">
-          <%= dish.name %></td>
+          <%= dish.name %>
+        </td>
+        <td>
+          <%= select_tag(:venue_id, options_from_collection_for_select(Venue.all, :id, :name), :class => "form-control") %>
+        </td>
         <td>
           <% if dish.cuisine.present? %>
             <a href="/cuisines/<%= dish.cuisine.id %>">
