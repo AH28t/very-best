@@ -95,13 +95,22 @@
 
       <% @dishes.each do |dish| %>
       <tr>
-        <td>
-          <a href="/dishes/<%= dish.id %>">
-          <%= dish.name %>
-        </td>
-        <td>
-          <%= select_tag(:venue_id, options_from_collection_for_select(Venue.all, :id, :name), :class => "form-control") %>
-        </td>
+         <form action="/create_bookmark" method="post">
+        <!-- Hidden input for authenticity token to protect from forgery -->
+        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+            <td>
+              <input type="hidden" name="dish_id" value="<%= dish.id %>">
+              <a href="/dishes/<%= dish.id %>">
+              <%= dish.name %>
+            </td>
+
+          <td>
+            <label for="venue_id" class="control-label">
+            <%= select_tag(:venue_id, options_from_collection_for_select(Venue.all, :id, :name), :class => "form-control") %>
+            </label>
+          </td>
+          
         <td>
           <% if dish.cuisine.present? %>
             <a href="/cuisines/<%= dish.cuisine.id %>">
@@ -109,11 +118,20 @@
             </a>
           <% end %>
         </td>
+        
+        <input type="hidden" name="user_id" value="<%= current_user.id %>">
+        
         <td>
-          <a href="/dishes/<%= dish.id %>" class="btn btn-primary">Show</a>
-          <a href="/dishes/<%= dish.id %>/edit" class="btn btn-warning">Edit</a>
-          <a href="/delete_dish/<%= dish.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+         
+          <button class="btn btn-success">
+          Create Bookmark
+          </button>
+
         </td>
+        </form>
+        
+        
+        
       </tr>
       <% end %>
     </table>
