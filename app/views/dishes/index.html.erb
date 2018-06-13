@@ -75,6 +75,16 @@
 
       <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
 
+<div class="form-group">
+ <% Cuisine.all.each do |cuisine2| %>
+   <label>
+     <%= check_box_tag('q[cuisine_id_eq_any][]', cuisine2.id, (true if @q.cuisine_id_eq_any.try(:include?, cuisine2.id))) %>
+     <%= cuisine2.name %>
+   </label>
+ <% end %>
+</div>
+
+
       <a href="/dishes" class="btn btn-secondary btn-block mb-1">Clear filters</a>
     <% end %>
     <a class="btn btn-secondary btn-block mb-1" data-toggle="collapse" href="#dishes_filters">
