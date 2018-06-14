@@ -1,5 +1,7 @@
 class DishesController < ApplicationController
   def index
+    @a = current_user.bookmarks.ransack(params[:a])
+    @bookmarks = @a.result(:distinct => true).includes(:user, :venue, :dish).page(params[:page]).per(10)
     @q = Dish.ransack(params[:q])
     @dishes = @q.result(:distinct => true).includes(:cuisine, :bookmarks, :fans, :specialists).page(params[:page]).per(10)
 
