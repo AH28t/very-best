@@ -55,15 +55,17 @@
 
 <div class="row">
   <div class="col-md-12">
-    <ul class="list-group">
+    <li class="list-group-item">
 
 <% Bookmark.where(dish_id: @dish.id).where(user_id: current_user).each do |bookmark| %>
-  <li class="list-group-item">
-    <a href="/venues/<%= bookmark.venue_id %>"><%= Venue.find(bookmark.venue_id).name %></a>
-  </li>
+  <p>
+  <i class="list-group-item">
+    <a href="/venues/<%= bookmark.venue_id %>"><%= Venue.find(bookmark.venue_id).name %>
+    </a>
+  </i>
+  </p>
 <% end %>
-      
-
-    </ul>
+   
+    </li>
   </div>
 </div>
